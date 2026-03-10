@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Cloudflare Pages Test</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+        padding: 2rem;
+      }
+      h1 {
+        font-size: clamp(2rem, 8vw, 4rem);
+        margin: 0 0 1rem;
+        text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      }
+      p {
+        font-size: 1.2rem;
+        max-width: 28rem;
+        line-height: 1.5;
+        margin: 0 0 2rem;
+      }
+      .status {
+        background: rgba(255,255,255,0.2);
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>✅ Cloudflare Pages Works!</h1>
+    <p>Your static site is live. This single file deployed in seconds with no build step.</p>
+    <div class="status">
+      Status: <strong>Deployed successfully</strong>
+    </div>
+  </body>
+</html>
