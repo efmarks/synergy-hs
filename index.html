@@ -2153,13 +2153,30 @@
         submitBtn.disabled = true;
         submitBtn.innerHTML = 'Sending... <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>';
 
-        setTimeout(() => {
-          contactForm.reset();
+        const formData = new FormData(contactForm);
+
+        fetch('https://formspree.io/f/xbdzgpzn', {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(response => {
+          if (response.ok) {
+            contactForm.reset();
+            formSuccess.classList.add('visible');
+            setTimeout(() => formSuccess.classList.remove('visible'), 5000);
+          } else {
+            return response.json().then(data => {
+              const msg = (data.errors && data.errors.map(e => e.message).join(', ')) || 'Something went wrong. Please try again.';
+              alert(msg);
+            });
+          }
+        })
+        .catch(() => alert('Network error. Please check your connection and try again.'))
+        .finally(() => {
           submitBtn.disabled = false;
           submitBtn.innerHTML = 'Send Message <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
-          formSuccess.classList.add('visible');
-          setTimeout(() => formSuccess.classList.remove('visible'), 5000);
-        }, 1200);
+        });
       }
     });
 
